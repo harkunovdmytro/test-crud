@@ -1,0 +1,12 @@
+<section class="form-container test-passing-page">
+  <div>
+    <a routerLink="/form/tests">Back to all tests</a>
+  </div>
+
+  <app-passing-test
+    [test]="test"
+    (savePassedTestResult)="saveResult($event)"
+  ></app-passing-test>
+</section>
+
+

@@ -1,0 +1,39 @@
+<div *ngIf="testPassingForm.value.title">
+  <h1>{{ testPassingForm.value.title }}</h1>
+
+  <ul>
+    <li *ngFor="let questionControl of testPassingForm.controls.questions.controls; let questionIndex = index">
+      <h2>{{questionControl.controls.title.value}}</h2>
+
+      <div *ngIf="questionControl.controls.type.value === 'text-question'" class="text-answer">
+        <textarea [formControl]="questionControl.controls.answerResult"></textarea>
+      </div>
+
+      <div
+        *ngIf="questionControl.controls.type.value === 'single-answer-question'
+        || questionControl.controls.type.value === 'multiple-answer-question'"
+        class="single-answer">
+        <ul class="multiple-answer-list">
+          <li class="multiple-answer-item"
+              *ngFor="let answerGroup of questionControl.controls.answers.controls; let checkboxControlIndex = index">
+            <input
+              type="checkbox"
+              class="form-checkbox-label"
+              [class.form-selected]="answerGroup.controls.isMarked.value"
+                   [formControl]="answerGroup.controls.isMarked"
+            >
+            <input
+              type="text"
+              class="form-input"
+              [formControl]="answerGroup.controls.text"
+            >
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+
+  <div>
+    <button class="form-button" (click)="saveResult()">Save</button>
+  </div>
+</div>

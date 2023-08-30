@@ -1,0 +1,115 @@
+<section class="form-wrapper">
+  <h1>Test creating</h1>
+  <div class="test-title">
+    <input
+      type="text"
+      class="form-input"
+      placeholder="Test title"
+      name="test-title"
+      [formControl]="testForm.controls.title"
+    >
+  </div>
+  <div class="questions-wrapper">
+    <ul class="questions-list">
+      <li *ngFor="let questionControl of testForm.controls.questions.controls; let questionIndex = index"
+          class="questions-item">
+        <h2>
+          <span class="text-number">Question #{{ questionIndex + 1 }}</span>
+          <button class="form-button" (click)="deleteQuestion(questionIndex)">Delete question</button>
+        </h2>
+        <div class="questions-title">
+          <h3>Question Title</h3>
+          <input
+            type="text"
+            class="form-input"
+            name="question-title"
+            placeholder="Question Title"
+            [formControl]="questionControl.controls.title">
+        </div>
+
+        <div class="question-type">
+          <h3>Question Type</h3>
+          <select
+            name="question-type"
+            [formControl]="questionControl.controls.type"
+            (change)="selectQuestionType($event, questionIndex)"
+          >
+            <option [value]="null">
+              ---
+            </option>
+
+            <option
+              *ngFor="let questionType of questionTypes"
+              [value]="questionType.type"
+            >
+              {{ questionType.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="answer-field">
+          <div *ngIf="questionControl.controls.type.value === 'text-question'" class="text-answer">
+            <textarea [formControl]="questionControl.controls.answer"></textarea>
+          </div>
+
+          <div *ngIf="questionControl.controls.type.value === 'single-answer-question'" class="single-answer">
+            <ul class="multiple-answer-list">
+              <li class="multiple-answer-item"
+                  *ngFor="let answerGroup of questionControl.controls.answers.controls; let radioControlIndex = index">
+                <input
+                  type="radio"
+                  class="form-checkbox-label"
+                  [class.form-selected]="answerGroup.controls.isCorrect"
+                  [id]="'radio-question-' + questionIndex + '-control-' + radioControlIndex"
+                  [name]="'single-questions-radio-' + radioControlIndex"
+                  [formControl]="answerGroup.controls.isCorrect"
+                  [checked]="answerGroup.controls.isCorrect.value"
+                  (change)="onRadioChange(questionIndex, radioControlIndex)"
+                >
+                <input
+                  type="text"
+                  class="form-input"
+                  [formControl]="answerGroup.controls.text"
+                >
+                <button class="form-button" (click)="deleteAnswer(questionIndex, radioControlIndex)">Delete Answer</button>
+              </li>
+            </ul>
+
+            <div class="control-wrapper">
+              <button class="form-button" (click)="addAnswer(questionIndex)">Add Answer</button>
+            </div>
+          </div>
+
+          <div *ngIf="questionControl.controls.type.value === 'multiple-answer-question'" class="multiple-answer">
+            <ul class="multiple-answer-list">
+              <li class="multiple-answer-item"
+                  *ngFor="let answerGroup of questionControl.controls.answers.controls; let checkboxControlIndex = index">
+                <input
+                  type="checkbox"
+                       class="form-checkbox-label"
+                  [class.form-selected]="answerGroup.controls.isCorrect"
+                  [formControl]="answerGroup.controls.isCorrect"
+                >
+                <input
+                  type="text"
+                  class="form-input"
+                  [formControl]="answerGroup.controls.text"
+                >
+                <button class="form-button" (click)="deleteAnswer(questionIndex, checkboxControlIndex)">Delete Answer</button>
+              </li>
+            </ul>
+
+            <div class="control-wrapper">
+              <button class="form-button" (click)="addAnswer(questionIndex)">Add Answer</button>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="test-actions">
+      <button class="form-button" (click)="addQuestion()">Add Question</button>
+      <button class="form-button" (click)="saveTest()">Save</button>
+    </div>
+  </div>
+</section>

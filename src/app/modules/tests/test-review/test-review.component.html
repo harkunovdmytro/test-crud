@@ -1,0 +1,37 @@
+<div class="form-container test-review-page">
+  <div class="links">
+    <a routerLink="/form/questions">Create new test</a>
+  </div>
+
+  <h1>Test <i>{{testResult?.title}}</i> review</h1>
+
+  <div>
+    <ul>
+      <li *ngFor="let question of testResult?.questions">
+        <h2 class="question-title">{{ question.title }}</h2>
+
+        <div *ngIf="question.type === 'text-question'">
+          <div>
+            Answer: {{question.answer}}
+          </div>
+          <div>
+            User Answer: {{question.answerResult}}
+          </div>
+        </div>
+
+        <div *ngIf="question.type === 'single-answer-question' || question.type === 'multiple-answer-question'">
+          <ul>
+            <li *ngFor="let answer of question.answers">
+              <div
+                [class.is-correct]="answer.isCorrect === answer.isMarked"
+                [class.is-incorrect]="answer.isMarked && answer.isCorrect !== answer.isMarked"
+              >
+                {{answer.text}}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

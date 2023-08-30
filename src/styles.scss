@@ -1,1 +1,97 @@
 /* You can add global styles to this file, and also import other style files */
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+h1 {
+  text-align: center;
+}
+
+span + button {
+  margin-left: 10px;
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 15px;
+  resize: none;
+}
+
+select {
+  font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-button {
+  padding: 10px 20px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+.form-button:hover {
+  background-color: #3367d6;
+}
+
+.form-checkbox-label {
+  display: inline-block;
+  margin-right: 15px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.form-hint {
+  font-size: 14px;
+  color: #777;
+}
+
+.form-error {
+  font-size: 14px;
+  color: #e53935;
+}
+
+.form-selected {
+  color: #4285f4;
+  font-weight: bold;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #4285f4;
+  box-shadow: 0 0 5px rgba(66, 133, 244, 0.5);
+}

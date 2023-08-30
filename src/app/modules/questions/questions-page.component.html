@@ -1,0 +1,10 @@
+<section class="form-container test-creating-page">
+  <div>
+    <a routerLink="/form/tests">Back to all tests</a>
+  </div>
+
+  <app-create-edit-question-form
+    [currentTest]="currentTest"
+    (createTest)="onCreateTest($event)"
+  ></app-create-edit-question-form>
+</section>

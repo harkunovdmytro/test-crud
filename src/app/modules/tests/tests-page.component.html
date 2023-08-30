@@ -1,0 +1,46 @@
+<main class="form-container tests-page-wrapper">
+  <h1>Tests</h1>
+
+  <div>
+    <a routerLink="/form/questions">Create new test</a>
+  </div>
+
+  <div class="available-tests">
+    <h2>All Tests</h2>
+    <ng-container *ngIf="tests$ | async as tests; else noTestsCreated">
+      <ng-container *ngIf="tests.length; else noTestsCreated">
+        <ul class="tests-list">
+          <li *ngFor="let test of tests" class="test-card">
+            <h2>{{ test.title }}</h2>
+            <button class="form-button" (click)="editTest(test.id)">Edit</button>
+            <button class="form-button" (click)="deleteTest(test.id)">Delete</button>
+            <button class="form-button" (click)="passTest(test.id)">Pass</button>
+          </li>
+        </ul>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #noTestsCreated>
+      There is no created tests
+    </ng-template>
+  </div>
+
+  <div class="test-results">
+    <h2>Test Results</h2>
+    <ng-container *ngIf="testsResults$ | async as testsResults; else noTestResults">
+      <ng-container *ngIf="testsResults.length; else noTestResults">
+        <ul>
+          <li *ngFor="let testsResult of testsResults" class="test-card">
+            <h2>{{ testsResult.title }}</h2>
+            <button class="form-button" (click)="watchResul(testsResult.tryId)">Review Result</button>
+          </li>
+        </ul>
+      </ng-container>
+    </ng-container>
+
+
+    <ng-template #noTestResults>
+      There is no test results
+    </ng-template>
+  </div>
+</main>
